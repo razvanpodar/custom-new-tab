@@ -1,0 +1,6 @@
+{
+    "name": "Custom New Tab",
+    "description": "Extension that allows the user to customize the new tab page.",
+    "version": "1.0",
+    "manifest_version": 3
+}
