@@ -3,7 +3,11 @@
     "description": "Extension that allows the user to customize the new tab page.",
     "version": "1.0",
     "manifest_version": 3,
+    "action": {
+        "default_popup": "popup.html"
+    },
     "chrome_url_overrides" : {
         "newtab": "new_tab.html"
-    }
+    },
+    "permissions": ["scripting"]
 }
