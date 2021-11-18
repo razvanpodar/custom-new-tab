@@ -18,4 +18,4 @@
     - days until date
     - weather
     - productivity
-- content for the 
+- content for the settings of each menu tab

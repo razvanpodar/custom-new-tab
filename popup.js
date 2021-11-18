@@ -1,36 +1,22 @@
 var activeTab = 0;
 var menuButtons = [];
+var htmlSources = ["popup/general.html", "popup/clock.html", "popup/days.html", 
+    "popup/weather.html", "popup/productivity.html"];
+var activeTabBgColor = "#cdcdcd";
+var content = document.getElementById("content");
 
 setup();
 
 function setup()
 {
-    var menuNodes = document.getElementById("menu").childNodes;
-    for (let i = 0; i < menuNodes.length; i++)
-    {
-        // Keep only the element nodes
-        if (menuNodes[i].nodeType == 1)
-        {
-            menuButtons.push(menuNodes[i]);
-        }
-    }
-    
-    console.log(menuButtons.length);
+    menuButtons = $("#menu").children();
 
     for (let i = 0; i < menuButtons.length; i++)
     {
         menuButtons[i].onclick = function() {onClick(i)};
     }
-    onClick(activeTab);
-}
-
-function clearContent()
-{
-    let content = document.getElementById("content");
-    while (content.firstChild) 
-    {
-        content.removeChild(content.firstChild);
-    }
+    menuButtons[0].style.backgroundColor = activeTabBgColor;
+    $("#content").load(htmlSources[0]);
 }
 
 function resetButtonsColor()
@@ -46,8 +32,13 @@ function resetButtonsColor()
 
 function onClick(tab)
 {
-    activeTab = tab;
-    clearContent();
-    resetButtonsColor();
-    menuButtons[tab].style.backgroundColor = "red";
+    // load content based on selected menu tab
+    if (activeTab != tab)
+    {
+        activeTab = tab;
+        $("#content").empty();
+        resetButtonsColor();
+        menuButtons[tab].style.backgroundColor = activeTabBgColor;
+        $("#content").load(htmlSources[tab]);
+    }
 }
