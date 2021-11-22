@@ -26,7 +26,7 @@ function init()
 
 function onClick(tab)
 {
-    // load content based on selected menu tab
+    // Load content based on selected menu tab
     if (activeTab != tab)
     {
         menuButtons[activeTab].className = "menu-button";
@@ -48,41 +48,87 @@ function onSave()
     // Save input data to local storage
     switch(activeTab)
     {
+        // General
         case 0:
-            var tabName = $("#tab-name").val();
-            var bgColor = $("#bg-color").val();
-            if (tabName !== "")
-            {
-                // window.localStorage.setItem('cnt-title', tabName);
-                console.log(tabName);
-                // chrome.storage.local.set({'cnt-tab-name': tabName});
-                chrome.storage.sync.set({"cnt_tab_name": tabName, 
-                    "cnt_bg_color": bgColor}, function()
-                {
-                    console.log("Tab name is set to " + tabName);
-                    console.log("Background color is set to " + bgColor);
-                    $("#tab-name").val("");
-                });
-            }
+            generalSave();
+            break;
+        // Clock
+        case 1:
+            break;
+        // Days until date
+        case 2:
+            daysSave();
+            break;
+        // Weather    
+        case 3:
+            break;
+        // Productivity
+        case 4:
             break;
     }
     // Reload custom new tab page
+    // TODO: reload only if data was saved
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
         chrome.tabs.update(tabs[0].id, {url: tabs[0].url});
     });
 }
 
+function generalSave()
+{
+    var tabName = $("#tab-name").val();
+    var bgColor = $("#bg-color").val();
+    if (tabName !== "")
+    {
+        console.log(tabName);
+        chrome.storage.sync.set({"cnt_tab_name": tabName, 
+                                "cnt_bg_color": bgColor}, 
+                                function()
+        {
+            console.log("Tab name is set to " + tabName);
+            console.log("Background color is set to " + bgColor);
+            $("#tab-name").val("");
+        });
+    }
+}
+
+function daysSave()
+{
+    var dateName = $("#date-name").val(); 
+    var date = $("#date").val();
+    var style = $("#style option:selected").val();
+    var includeToday = $("#today").is(":checked");
+    var includeLastDay = $("#last-day").is(":checked");
+    if (date && dateName != "")
+    {
+        chrome.storage.sync.set({"cnt_dudate": date,
+                                "cnt_dudate_name": dateName,
+                                "cnt_dudate_style": style,
+                                "cnt_dudate_today": includeToday,
+                                "cnt_dudate_last_day": includeLastDay}, 
+                                function() 
+        {
+            console.log("Date name is set to " + dateName);
+            console.log("Date is set to " + date);
+            console.log("Style is set to " + style);
+            console.log("Today is set to " + includeToday);
+            console.log("Last day is set to " + includeLastDay);
+            $("#date-name").val("");
+        });
+    }
+}
+
 function onReset()
 {
+    // Reset all values by deleting the keys from local storage
     switch(activeTab)
     {
         case 0:
-
-
+            chrome.storage.sync.remove(["cnt_tab_name", "cnt_bg_color"]);
             break;
     }
-    // Reset all values by deleting the keys from local storage
-    console.log("Reset values!");
-    // window.localStorage.removeItem('cnt-title');
-    // window.localStorage.remoteItem('cnt-bg-color');
+    console.log("Values reset!");
+    // Reload custom new tab page
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+        chrome.tabs.update(tabs[0].id, {url: tabs[0].url});
+    });
 }

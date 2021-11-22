@@ -75,12 +75,15 @@ html {
 /* General */
 
 .input-div {
-    margin-top: 2rem;
-    margin-left: 2rem;
-    margin-right: 2rem;
+    /* margin-top: 1rem; */
+    margin-left: 1rem;
+    margin-right: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 0 1rem;
 }
 
-.input-label {
+/* .input-label {
     font-size: 1rem;
     float: left;
 }
@@ -88,10 +91,10 @@ html {
 .input {
     font-size: 1rem;
     float: right;
-}
+} */
 
 .buttons-container {
-    margin-top: 3rem;
+    margin-top: 2rem;
     margin-left: 5rem;
     margin-right: 5rem;
     display: grid;
