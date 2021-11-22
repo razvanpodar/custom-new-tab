@@ -8,5 +8,6 @@
     },
     "chrome_url_overrides" : {
         "newtab": "new_tab.html"
-    }
+    },
+    "permissions": ["tabs", "storage"]
 }
