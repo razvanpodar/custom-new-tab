@@ -54,8 +54,6 @@ html {
 }
 
 .menu-button:hover {
-    /* background-color: var(--btn-color);
-    color: var(--btn-hbg-color); */
     text-shadow: 0 0.1rem 0.75rem var(--btn-color);
     font-style: italic;
 }

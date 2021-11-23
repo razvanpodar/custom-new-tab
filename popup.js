@@ -1,7 +1,7 @@
 var activeTab = 0;
 var menuButtons = [];
-var htmlSources = ["popup/general.html", "popup/clock.html", "popup/days.html", 
-    "popup/weather.html", "popup/productivity.html"];
+var htmlSources = ["popup/general.html", "popup/clock.html", 
+    "popup/days.html", "popup/weather.html", "popup/productivity.html"];
 var content = document.getElementById("content");
 
 init();
@@ -113,6 +113,8 @@ function daysSave()
             console.log("Today is set to " + includeToday);
             console.log("Last day is set to " + includeLastDay);
             $("#date-name").val("");
+            $("#today").prop("checked", false);
+            $("#last-day").prop("checked", false);
         });
     }
 }
