@@ -61,6 +61,7 @@ function onSave()
             break;
         // Weather    
         case 3:
+            weatherSave();
             break;
         // Productivity
         case 4:
@@ -79,7 +80,6 @@ function generalSave()
     var bgColor = $("#bg-color").val();
     if (tabName !== "")
     {
-        console.log(tabName);
         chrome.storage.sync.set({"cnt_tab_name": tabName, 
                                 "cnt_bg_color": bgColor}, 
                                 function()
@@ -115,6 +115,23 @@ function daysSave()
             $("#date-name").val("");
             $("#today").prop("checked", false);
             $("#last-day").prop("checked", false);
+        });
+    }
+}
+
+function weatherSave()
+{
+    var city = $("#city-name").val();
+    var scale = $("#scale option:selected").val();
+    if (city !== "")
+    {
+        chrome.storage.sync.set({"cnt_city_name": city, 
+                                "cnt_scale": scale}, 
+                                function()
+        {
+            console.log("City is set to " + city);
+            console.log("Scale is set to " + scale);
+            $("#city-name").val("");
         });
     }
 }

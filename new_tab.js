@@ -11,7 +11,8 @@ init();
 function init()
 {
     chrome.storage.sync.get(["cnt_tab_name", "cnt_bg_color", "cnt_dudate", 
-                            "cnt_dudate_name"], function(result) {
+                            "cnt_dudate_name"], function(result) 
+    {
         if (result.cnt_tab_name) 
         {
             document.title = result.cnt_tab_name;
@@ -29,10 +30,17 @@ function init()
             var dudate = new Date(result.cnt_dudate);
             var diff = Math.abs(dudate - today);
             var days = Math.trunc(diff / (1000 * 3600 * 24));
-            // TODO: Change to jquery
+            const lang = navigator.language;
+            displayDate = dudate.toLocaleDateString(lang, {
+                weekday: 'short', day: 'numeric',
+                year: 'numeric', month: 'long'
+            });
+
             document.getElementById("days").innerText = days;
             document.getElementById("ud").innerText = "Days until " 
                 + dudateName.toUpperCase();
+            document.getElementById("date").innerText = "(" + displayDate 
+                + ")";
         }
     });
 }
