@@ -8,21 +8,19 @@
 </head>
 <body>
     <h1 class="title">Weather</h1>
-    <div class="input-div">
+    <div class="input-container">
         <label for="city-name" class="input-label">City</label>
-        <input type="text" class="input" id="city-name"><br>
-    </div>
-    <div class="input-div">
+        <input type="text" class="input" id="city-name">
         <label for="scale" class="input-label">Scale</label>
-        <select name="scale" id="scale">
+        <select name="scale" class="input" id="scale">
             <option value="C">Celcius</option>
             <option value="F">Fahrenheit</option>
             <option value="K">Kelvin</option>
         </select>
     </div>
     <div class="buttons-container">
-        <button id="btn-save">Save</button>
-        <button id="btn-reset">Reset</button>
+        <button class="btn" id="btn-save">Save</button>
+        <button class="btn" id="btn-reset">Reset</button>
     </div>
 </body>
 </html>
